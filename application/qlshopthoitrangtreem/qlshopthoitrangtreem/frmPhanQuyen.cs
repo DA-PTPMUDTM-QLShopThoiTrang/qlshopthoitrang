@@ -7,83 +7,68 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BLL;
+using DAL;
 namespace qlshopthoitrangtreem
 {
     public partial class frmPhanQuyen : Form
     {
+        BLL_NhomNguoiDung bllnnd = new BLL_NhomNguoiDung();
+        BLL_QLPhanQuyen bllpq = new BLL_QLPhanQuyen();
         public frmPhanQuyen()
         {
             InitializeComponent();
+            this.Load += FrmPhanQuyen_Load;
+            qL_NhomNguoiDungDataGridView.SelectionChanged += QL_NhomNguoiDungDataGridView_SelectionChanged;
         }
 
-        private void qL_NhomNguoiDungBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        private void QL_NhomNguoiDungDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            this.Validate();
-            this.qL_NhomNguoiDungBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.dataSet1);
-
-        }
-
-        private void frmPhanQuyen_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'dataSet1.QL_PhanQuyen' table. You can move, or remove it, as needed.
-            this.qL_PhanQuyenTableAdapter.Fill(this.dataSet1.QL_PhanQuyen);
-            // TODO: This line of code loads data into the 'dataSet1.QL_NhomNguoiDung' table. You can move, or remove it, as needed.
-            this.qL_NhomNguoiDungTableAdapter.Fill(this.dataSet1.QL_NhomNguoiDung);
-
-        }
-
-        private void fill_DKToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
+            // load
+            dataGridView1.Rows.Clear();
+            string manhom = qL_NhomNguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString();
+            List<NhomNguoiDungManHinh> nhomNguoiDungManHinhs = bllpq.layNNDMH(manhom);
+            foreach(NhomNguoiDungManHinh item in nhomNguoiDungManHinhs)
             {
-                this.qL_PhanQuyen_DKTableAdapter.Fill_DK(this.dataSet1.QL_PhanQuyen_DK, maNhomNguoiDungToolStripTextBox.Text);
+                dataGridView1.Rows.Add(new object[] { item.MaManHinh, item.TenManHinh, item.CoQuyen});
             }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
+        }
 
-        }
-        public void LoadDataCondition()
+        private void FrmPhanQuyen_Load(object sender, EventArgs e)
         {
-            this.qL_PhanQuyen_DKTableAdapter.Fill_DK(this.dataSet1.QL_PhanQuyen_DK,
-            qL_NhomNguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString());
-        }
-        private void qL_NhomNguoiDungDataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            this.LoadDataCondition();
+            List<QL_NhomNguoiDung> nhomNguoiDungManHinhs = bllnnd.layDsMH();
+
+            qL_NhomNguoiDungDataGridView.DataSource = nhomNguoiDungManHinhs;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string _NhomNguoiDung = qL_NhomNguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString();
+            string maNhom = qL_NhomNguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString();
             try
             {
-                foreach (DataGridViewRow item in qL_PhanQuyen_DKDataGridView.Rows)
+                foreach (DataGridViewRow item in dataGridView1.Rows)
                 {
                     if (item.Cells[0].Value != null)
                     {
                         if
-                        (qL_PhanQuyen_DKTableAdapter.KiemTraKhoaChinhPhanQuyen(_NhomNguoiDung, item.Cells[0].Value
+                        (bllpq.layNhomNguoiDungManHinhbyMa(maNhom, item.Cells[0].Value
                         .ToString()) == null)
                         {
                             try
                             {
-                                qL_PhanQuyenTableAdapter.Insert(_NhomNguoiDung,
+                                bllpq.themNhomNguoiDungManHinh(maNhom,
                                 item.Cells[0].Value.ToString(), (bool)(item.Cells[2].Value));
                             }
                             catch
                             {
-                                qL_PhanQuyenTableAdapter.Insert(_NhomNguoiDung,
+                                bllpq.themNhomNguoiDungManHinh(maNhom,
                                 item.Cells[0].Value.ToString(), false);
                             }
                         }
                         else
                         {
-                            qL_PhanQuyenTableAdapter.UpdateQuery((item.Cells[2] == null) ? false
-                           : (bool)(item.Cells[2].Value), _NhomNguoiDung, item.Cells[0].Value.ToString());
+                            bllpq.suaNhomNguoiDungManHinh(maNhom, item.Cells[0].Value.ToString(), (item.Cells[2] == null) ? false
+                           : (bool)(item.Cells[2].Value));
                         }
                     }
                 }
@@ -94,6 +79,5 @@ namespace qlshopthoitrangtreem
 
             }
         }
-    
     }
 }

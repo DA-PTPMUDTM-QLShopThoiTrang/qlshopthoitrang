@@ -7,93 +7,83 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BLL;
+using DAL;
 namespace qlshopthoitrangtreem
 {
     public partial class frmThemNguoiDungNhomND : Form
     {
+        BLL_NguoiDung bllnd = new BLL_NguoiDung();
+        BLL_NhomNguoiDung bllnnd = new BLL_NhomNguoiDung();
+        BLL_NguoiDungNhomNguoiDung bllndnnd = new BLL_NguoiDungNhomNguoiDung();
         public frmThemNguoiDungNhomND()
         {
             InitializeComponent();
+            this.Load += FrmThemNguoiDungNhomND_Load;
+            qL_NhomNguoiDungComboBox.SelectedIndexChanged += QL_NhomNguoiDungComboBox_DropDown;
         }
 
-        private void qL_NguoiDungBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        private void QL_NhomNguoiDungComboBox_DropDown(object sender, EventArgs e)
         {
-            this.Validate();
-            this.qL_NguoiDungBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.dataSet1);
-
+            qL_NguoiDungNhomNguoiDungDKDataGridView.DataSource = bllndnnd.layDsByMa(qL_NhomNguoiDungComboBox.SelectedValue.ToString());
         }
 
-        private void frmThemNguoiDungNhomND_Load(object sender, EventArgs e)
+        private void FrmThemNguoiDungNhomND_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataSet1.QL_NguoiDungNhomNguoiDung' table. You can move, or remove it, as needed.
-            this.qL_NguoiDungNhomNguoiDungTableAdapter.Fill(this.dataSet1.QL_NguoiDungNhomNguoiDung);
-            // TODO: This line of code loads data into the 'dataSet1.QL_NhomNguoiDung' table. You can move, or remove it, as needed.
-            this.qL_NhomNguoiDungTableAdapter.Fill(this.dataSet1.QL_NhomNguoiDung);
-            // TODO: This line of code loads data into the 'dataSet1.QL_NguoiDung' table. You can move, or remove it, as needed.
-            this.qL_NguoiDungTableAdapter.Fill(this.dataSet1.QL_NguoiDung);
+            qL_NguoiDungDataGridView.DataSource = bllnd.layDsMH();
 
-        }
-
-        private void fill_DKToolStripButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.qL_NguoiDungNhomNguoiDungDKTableAdapter.Fill_DK(this.dataSet1.QL_NguoiDungNhomNguoiDungDK, maNhomNguoiDungToolStripTextBox.Text);
-            }
-            catch (System.Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private void qL_NhomNguoiDungComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (qL_NhomNguoiDungComboBox.SelectedValue != null)
-            {
-                this.qL_NguoiDungNhomNguoiDungDKTableAdapter.Fill_DK(this.dataSet1.QL_NguoiDungNhomNguoiDungDK, qL_NhomNguoiDungComboBox.SelectedValue.ToString());
-            }
-        }
-        void loadDK()
-        {
-            if (qL_NhomNguoiDungComboBox.SelectedValue != null)
-            {
-                this.qL_NguoiDungNhomNguoiDungDKTableAdapter.Fill_DK(this.dataSet1.QL_NguoiDungNhomNguoiDungDK, qL_NhomNguoiDungComboBox.SelectedValue.ToString());
-            }
+            qL_NhomNguoiDungComboBox.DataSource = bllnnd.layDsMH();
+            qL_NhomNguoiDungComboBox.DisplayMember = "TenNhom";
+            qL_NhomNguoiDungComboBox.ValueMember = "MaNhom";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string tendangnhap = qL_NguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString();
-            string manhomnd = qL_NhomNguoiDungComboBox.SelectedValue.ToString();
+            try
+            {
+                string mand = qL_NguoiDungDataGridView.CurrentRow.Cells[0].Value.ToString();
+                string mannd = qL_NhomNguoiDungComboBox.SelectedValue.ToString();
+                QL_NguoiDungNhomNguoiDung mh = bllndnnd.themNguoiDungNhomNguoiDung(mannd, mand, "");
+                if (mh == null)
+                {
+                    MessageBox.Show("Người dùng này đã được thêm!");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm thành công");
+                    qL_NguoiDungNhomNguoiDungDKDataGridView.DataSource = bllndnnd.layDsByMa(qL_NhomNguoiDungComboBox.SelectedValue.ToString());
+                }
 
-            int? kt = (int)this.qL_NguoiDungNhomNguoiDungTableAdapter.kiemTraKhoa(tendangnhap, manhomnd);
-            if (kt.Value > 0)
-            {
-                MessageBox.Show("Trung khoa");
             }
-            else
+            catch (Exception err)
             {
-                this.qL_NguoiDungNhomNguoiDungTableAdapter.Insert(tendangnhap, manhomnd, "");
-                this.loadDK();
+                MessageBox.Show("Đã xảy ra lỗi. Vui lòng thực hiện lại!");
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string tendangnhap = qL_NguoiDungNhomNguoiDungDKDataGridView.CurrentRow.Cells[0].Value.ToString();
-            string manhomnguoidung = qL_NguoiDungNhomNguoiDungDKDataGridView.CurrentRow.Cells[1].Value.ToString();
-            string ghichu = qL_NguoiDungNhomNguoiDungDKDataGridView.CurrentRow.Cells[2].Value.ToString();
             try
             {
-                this.qL_NguoiDungNhomNguoiDungTableAdapter.Delete(tendangnhap, manhomnguoidung, ghichu);
-                MessageBox.Show("Xóa thành công");
-                this.loadDK();
-            }catch(Exception err)
+                DialogResult result = MessageBox.Show("Bạn có muốn xóa không?", "Thông báo", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.OK)
+                {
+                    string temdangnhap = qL_NguoiDungNhomNguoiDungDKDataGridView.CurrentRow.Cells[0].Value.ToString();
+                    string mannd = qL_NguoiDungNhomNguoiDungDKDataGridView.CurrentRow.Cells[1].Value.ToString();
+                    if (bllndnnd.xoaNguoiDungNhomNguoiDung(mannd, temdangnhap))
+                    {
+                        MessageBox.Show("Xóa thành công");
+                        qL_NguoiDungNhomNguoiDungDKDataGridView.DataSource = bllndnnd.layDsByMa(qL_NhomNguoiDungComboBox.SelectedValue.ToString());
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa không thành công!");
+                    }
+                }
+            }
+            catch (Exception err)
             {
-                MessageBox.Show("Đã có lỗi xảy ra. Vui lòng thực hiện lại!");
+                MessageBox.Show("Đã xảy ra lỗi. Vui lòng thực hiện lại!");
             }
         }
     }

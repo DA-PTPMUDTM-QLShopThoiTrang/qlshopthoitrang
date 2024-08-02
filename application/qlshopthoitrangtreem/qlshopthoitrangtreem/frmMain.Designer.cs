@@ -38,6 +38,7 @@ namespace qlshopthoitrangtreem
             this.mànHìnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thêmSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,6 +119,8 @@ namespace qlshopthoitrangtreem
             // 
             // quảnLýSảnPhẩmToolStripMenuItem
             // 
+            this.quảnLýSảnPhẩmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thêmSảnPhẩmToolStripMenuItem});
             this.quảnLýSảnPhẩmToolStripMenuItem.Name = "quảnLýSảnPhẩmToolStripMenuItem";
             this.quảnLýSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(141, 24);
             this.quảnLýSảnPhẩmToolStripMenuItem.Text = "Quản lý sản phẩm";
@@ -127,6 +130,13 @@ namespace qlshopthoitrangtreem
             this.quảnLýKháchHàngToolStripMenuItem.Name = "quảnLýKháchHàngToolStripMenuItem";
             this.quảnLýKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.quảnLýKháchHàngToolStripMenuItem.Text = "Quản lý khách hàng";
+            // 
+            // thêmSảnPhẩmToolStripMenuItem
+            // 
+            this.thêmSảnPhẩmToolStripMenuItem.Name = "thêmSảnPhẩmToolStripMenuItem";
+            this.thêmSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.thêmSảnPhẩmToolStripMenuItem.Text = "Thêm sản phẩm";
+            this.thêmSảnPhẩmToolStripMenuItem.Click += new System.EventHandler(this.thêmSảnPhẩmToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -159,5 +169,6 @@ namespace qlshopthoitrangtreem
         private System.Windows.Forms.ToolStripMenuItem mànHìnhToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýSảnPhẩmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýKháchHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thêmSảnPhẩmToolStripMenuItem;
     }
 }

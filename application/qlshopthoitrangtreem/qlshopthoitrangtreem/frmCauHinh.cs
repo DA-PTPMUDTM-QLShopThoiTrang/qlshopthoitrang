@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QL_NguoiDung;
+using BLL;
 
 namespace qlshopthoitrangtreem
 {
     public partial class frmCauHinh : Form
     {
-        Ql_NguoiDung CauHinh = new Ql_NguoiDung();
+        BLL_NguoiDung CauHinh = new BLL_NguoiDung();
         public frmCauHinh()
         {
             InitializeComponent();

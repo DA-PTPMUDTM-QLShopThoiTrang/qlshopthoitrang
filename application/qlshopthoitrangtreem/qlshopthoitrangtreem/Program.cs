@@ -19,7 +19,7 @@ namespace qlshopthoitrangtreem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             loginForm = new frmDangNhap();
-            /*Application.Run(new frmMain());*/
+            /*Application.Run(new frmPhanQuyen());*/
             Application.Run(loginForm);
         }
     }

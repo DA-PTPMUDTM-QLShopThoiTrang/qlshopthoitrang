@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QL_NguoiDung;
-
+using BLL;
+using DAL;
 namespace qlshopthoitrangtreem
 {
     public partial class frmMain : Form
     {
-        string tendangnhap = "user3";
-        Ql_NguoiDung nguoidung = new Ql_NguoiDung();
+        string tendangnhap = "admin";
+        BLL_NguoiDung nguoidung = new BLL_NguoiDung();
         
         public frmMain()
         {
@@ -70,14 +70,16 @@ namespace qlshopthoitrangtreem
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            List<string> nhomND = nguoidung.GetMaNhomNguoiDung(this.tendangnhap);
+            BLL_NhomNguoiDung bllnnd = new BLL_NhomNguoiDung();
+            BLL_QLPhanQuyen bllpq = new BLL_QLPhanQuyen();
+            List<string> nhomND = bllnnd.layDsNhomNguoiDungTypeLString(this.tendangnhap);
             foreach (string item in nhomND)
             {
-                DataTable dsQuyen = nguoidung.GetMaManHinh(item);
-                foreach (DataRow mh in dsQuyen.Rows)
+                List<NhomNguoiDungManHinh> dsQuyen = bllpq.LayDSManHinhPhanQuyen(item);
+                foreach (NhomNguoiDungManHinh mh in dsQuyen)
                 {
                     FindMenuPhanQuyen(this.menuStrip1.Items,
-                    mh[0].ToString(), Convert.ToBoolean(mh[2].ToString()));
+                    mh.MaManHinh, Convert.ToBoolean(mh.CoQuyen));
                 }
             }
         }
@@ -106,6 +108,13 @@ namespace qlshopthoitrangtreem
         private void mànHìnhToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManHinh form = new frmManHinh();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void thêmSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLSanPham form = new frmQLSanPham();
             form.MdiParent = this;
             form.Show();
         }

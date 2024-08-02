@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using QL_NguoiDung;
-using static QL_NguoiDung.LoginResultEnum;
-
+using static BLL.LoginResultEnum;
+using BLL;
 namespace qlshopthoitrangtreem
 {
     public partial class frmDangNhap : Form
     {
-        Ql_NguoiDung qlnguoidung = new Ql_NguoiDung();
+        BLL_NguoiDung qlnguoidung = new BLL_NguoiDung();
         public frmDangNhap()
         {
             InitializeComponent();
@@ -47,7 +39,9 @@ namespace qlshopthoitrangtreem
         public void ProcessLogin()
         {
             LoginResult result;
-            result = qlnguoidung.Check_User(this.ctDangNhap1.tbtendangnhap.Text, this.ctDangNhap1.tbmatkhau.Text); //Check_User viết trong Class QL_NguoiDung
+            BLL_NguoiDung bll_nd = new BLL_NguoiDung();
+
+            result = bll_nd.Check_User(this.ctDangNhap1.tbtendangnhap.Text, this.ctDangNhap1.tbmatkhau.Text); //Check_User viết trong Class QL_NguoiDung
             // Wrong username or pass
             if (result == LoginResult.Invalid)
             {
@@ -85,6 +79,6 @@ namespace qlshopthoitrangtreem
             this.hienFrmCauHinh();
         }
 
-      
+       
     }
 }
