@@ -30,13 +30,13 @@ class SanPham
             $loaiSanPham = json_decode(stripslashes($data['data']), true);
 
             $query = "insert into sanpham(ten, mota, gia, gioitinh, DanhMuc_id, anhdaidien)
-            values('$ten', '$mota', $gia, '$gioitinh', $DanhMuc_id, '$anhdaidien')
+            values('$ten', N'$mota', $gia, N'$gioitinh', $DanhMuc_id, '$anhdaidien')
         ";
             $sanpham_id = $this->db->insertNonParam($query);
             if ($sanpham_id) {
                 foreach ($loaiSanPham as $lsp) {
                     $query = "insert into loaisanpham(mausac, hinhanh, SanPham_id)
-                    values('" . $lsp["color"] . "', '" . $lsp["image"] . "', " . $sanpham_id . ")
+                    values(N'" . $lsp["color"] . "', '" . $lsp["image"] . "', " . $sanpham_id . ")
                 ";
                     $loaiSanPham_id = $this->db->insertNonParam($query);
                     foreach ($lsp["option_value"] as $kcsp) {
@@ -99,7 +99,8 @@ class SanPham
                     group by kichcosanpham.SanPham_id  
                  ) as donhang on donhang.SanPham_id = sanpham.id
                 $locTuyChon
-                LIMIT $offset,$limit
+                 ORDER BY sanpham.ngaytao ASC
+				 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
             } else {
                 $locTuyChon = $locTuyChon != "" ? "where $locTuyChon" : " ";
@@ -122,7 +123,7 @@ class SanPham
                  ) as donhang on donhang.SanPham_id = sanpham.id
                 $locTuyChon
                 ORDER BY " . $arrSX[0] . " " . $arrSX[1] .
-                    " LIMIT $offset,$limit
+                    " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
             }
             $queryCount = "select COUNT(*) as sl from sanpham $locTuyChon";
@@ -148,7 +149,8 @@ class SanPham
                     group by kichcosanpham.SanPham_id  
                  ) as donhang on donhang.SanPham_id = sanpham.id
                 where sanpham.ten LIKE '%$timKiem%' $locTuyChon 
-                LIMIT $offset,$limit
+               ORDER BY sanpham.ngaytao ASC
+				 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
             } else {
                 $locTuyChon = $locTuyChon != "" ? " and $locTuyChon" : " ";
@@ -171,7 +173,7 @@ class SanPham
                  ) as donhang on donhang.SanPham_id = sanpham.id
                 where sanpham.ten LIKE '%$timKiem%' $locTuyChon 
                 ORDER BY " . $arrSX[0] . " " . $arrSX[1] .
-                    " LIMIT $offset,$limit
+                    " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
             }
             $queryCount = "select COUNT(*) as sl from sanpham where sanpham.ten LIKE '%$timKiem%' $locTuyChon ";
@@ -198,7 +200,8 @@ class SanPham
                 from  sanpham
                 left JOIN khuyenmai on sanpham.KhuyenMai_id = khuyenmai.id
                 where $queryIn
-                LIMIT $offset,$limit
+                ORDER BY sanpham.ngaytao ASC
+				 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
         } else {
             $query = "
@@ -206,7 +209,8 @@ class SanPham
                 from  sanpham
                 left JOIN khuyenmai on sanpham.KhuyenMai_id = khuyenmai.id
                 where sanpham.ten LIKE '%$timKiem%' and ( $queryIn )
-                LIMIT $offset,$limit
+                ORDER BY sanpham.ngaytao ASC
+				 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
                 ";
         }
         return $this->db->selectNonParam($query);
@@ -316,7 +320,7 @@ class SanPham
             if (count($loaiSanPham_m) != 0) {
                 foreach ($loaiSanPham_m as $lsp) {
                     $query = "insert into loaisanpham(mausac, hinhanh, SanPham_id)
-                    values('" . $lsp["color"] . "', '" . $lsp["image"] . "', " . $id . ")
+                    values(N'" . $lsp["color"] . "', '" . $lsp["image"] . "', " . $id . ")
                 ";
                     $loaiSanPham_id = $this->db->insertNonParam($query);
                     foreach ($lsp["option_value"] as $kcsp) {

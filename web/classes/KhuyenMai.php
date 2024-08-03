@@ -56,35 +56,35 @@ class KhuyenMai
                 inner join sanpham on khuyenmai.id = sanpham.KhuyenMai_id
                 GROUP by khuyenmai.id, khuyenmai.ten, khuyenmai.phantram, khuyenmai.thoigian_bd, khuyenmai.thoigian_kt
                 ORDER BY " . $arrSX[0] . " " . $arrSX[1] .
-                    " limit $offset,$limit ";
+                    " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;";
             } else if (strtolower($arrSX[1]) == "desc") {
                 $query = "select khuyenmai.*, COUNT(sanpham.KhuyenMai_id) as sl
                 from khuyenmai
                 inner join sanpham on khuyenmai.id = sanpham.KhuyenMai_id
                 GROUP by khuyenmai.id, khuyenmai.ten, khuyenmai.phantram, khuyenmai.thoigian_bd, khuyenmai.thoigian_kt
                 ORDER BY " . $arrSX[0] . " " . $arrSX[1] .
-                    " limit $offset,$limit ";
+                    " OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;";
             } else if (strtolower($arrSX[1]) == "conhan") {
                 $query = "select khuyenmai.*, COUNT(sanpham.KhuyenMai_id) as sl
                 from khuyenmai
                 inner join sanpham on khuyenmai.id = sanpham.KhuyenMai_id
                 where khuyenmai.thoigian_kt >= CURDATE() or khuyenmai.thoigian_kt is null
                 GROUP by khuyenmai.id, khuyenmai.ten, khuyenmai.phantram, khuyenmai.thoigian_bd, khuyenmai.thoigian_kt 
-                 limit $offset,$limit ";
+                 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY; ";
             } else {
                 $query = "select khuyenmai.*, COUNT(sanpham.KhuyenMai_id) as sl
                 from khuyenmai
                 inner join sanpham on khuyenmai.id = sanpham.KhuyenMai_id
                 where khuyenmai.thoigian_kt < CURDATE()
                 GROUP by khuyenmai.id, khuyenmai.ten, khuyenmai.phantram, khuyenmai.thoigian_bd, khuyenmai.thoigian_kt 
-                 limit $offset,$limit ";
+                 OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY; ";
             }
         } else {
             $query = "select khuyenmai.*, COUNT(sanpham.KhuyenMai_id) as sl
             from khuyenmai
             inner join sanpham on khuyenmai.id = sanpham.KhuyenMai_id
             GROUP by khuyenmai.id, khuyenmai.ten, khuyenmai.phantram, khuyenmai.thoigian_bd, khuyenmai.thoigian_kt
-             limit $offset,$limit ";
+             OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY; ";
         }
         // return $query;
         return $this->db->selectNonParam($query);

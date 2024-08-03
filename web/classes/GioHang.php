@@ -40,7 +40,7 @@ class GioHang
             return false;
         }
     }
-    public function laySpGioHang($khid, $sort, $limit)
+    public function laySpGioHang($khid, $sort, $offset, $limit)
     {
         try {
             $dssp = $this->db->selectNonParam("select sanpham.id as spid, loaisanpham.id as lspid, kichcosanpham.id as kcspid, sanpham.ten, sanpham.gia, loaisanpham.hinhanh, kichcosanpham.kichco, giohang.soluong, sanpham.KhuyenMai_id, khuyenmai.phantram, khuyenmai.thoigian_bd, thoigian_kt
@@ -49,8 +49,9 @@ class GioHang
             INNER join loaisanpham on loaisanpham.id = kichcosanpham.LoaiSanPham_id and loaisanpham.SanPham_id = kichcosanpham.SanPham_id
             INNER join sanpham on sanpham.id = loaisanpham.SanPham_id and sanpham.id = kichcosanpham.SanPham_id
             left join khuyenmai on khuyenmai.id = sanpham.KhuyenMai_id
-            where giohang.KhachHang_id = $khid $sort limit $limit;
-            order by ngaythem desc  
+            where giohang.KhachHang_id = $khid $sort
+            
+            OFFSET $offset ROWS FETCH NEXT $limit ROWS ONLY;
             ");
 
             return array_map(function ($item) {

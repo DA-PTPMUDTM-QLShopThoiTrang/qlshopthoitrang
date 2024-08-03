@@ -64,7 +64,7 @@ class DonHang
             $diaChi = $this->db->selectNonParam("select * from diachi where diachi.id = " . $data['addressId'] . " and diachi.KhachHang_id = " . $data['userId']);
             date_default_timezone_set('Asia/Ho_Chi_Minh');
             $queryHd = "insert into donhang(donhang.tongtien, donhang.ngaytao, donhang.KhachHang_id, donhang.TrangThaiDonHang_id, donhang.diachi) 
-            values(" . $tongTien . ", '" . date('Y-m-d H:i:s') . "', " . $data['userId'] . ", 1, '" . $diaChi[0]['sdt'] . ", " . $diaChi[0]['diachicuthe'] . ", " . $diaChi[0]['diachi'] . "')";
+            values(" . $tongTien . ", '" . date('Y-m-d H:i:s') . "', " . $data['userId'] . ", 1, N'" . $diaChi[0]['sdt'] . ", " . $diaChi[0]['diachicuthe'] . ", " . $diaChi[0]['diachi'] . "')";
 
 
 
@@ -172,7 +172,7 @@ class DonHang
             where kichcosanpham.id in (" . implode(',', $dsCtdh) . ");";
 
             $this->db->updateNonParam("update donhang 
-            set TrangThaiDonHang_id = 4, ngaysua = now()
+            set TrangThaiDonHang_id = 4, ngaysua = getdate()
             where id = $dhId");
             $this->db->updateNonParam($queryU);
             sqlsrv_commit($this->db->conn);
@@ -189,7 +189,7 @@ class DonHang
             sqlsrv_begin_transaction($this->db->conn);
             $this->db->selectNonParam("
             INSERT into danhgiasanpham(danhgiasanpham.KhachHang_id, danhgiasanpham.DonHang_id, danhgiasanpham.SanPham_id, danhgiasanpham.sosao,danhgiasanpham.binhluan, ngaytao)
-            values($khId, $dhId, $spId, $soSao, '$noiDung', now());
+            values($khId, $dhId, $spId, $soSao, N'$noiDung', getdate());
             ");
             sqlsrv_commit($this->db->conn);
             return true;
