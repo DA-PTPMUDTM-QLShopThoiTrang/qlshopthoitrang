@@ -103,7 +103,7 @@ const order = (function () {
           });
         });
       });
-    
+
       return arr;
     },
     async getOrders(type) {
@@ -147,8 +147,8 @@ const order = (function () {
                                 Mã đơn hàng: ${item["id"]} | 
                                 <span class="text-gray-800">${
                                   item["trangthaidonhang_id"] == 1
-                                    ? item["ngaytao"]
-                                    : item["ngaysua"]
+                                    ? item["ngaytao"]["date"]
+                                    : item["ngaysua"]["date"]
                                 }</span>
                             </h4>
                             <h4 class="whitespace-nowrap uppercase md:text-lg sm:text-base text-sm float-right p-2 text-rose-500">
@@ -259,19 +259,21 @@ const order = (function () {
       this.showLoader();
       content.innerHTML = "";
 
-      this.getOrders(entry.type).then(res=>{
-        arrOrder = this.formatData(res);
-        if (entry.type === 3) {
-          arrOrder = this.combineData(arrOrder);
-        }
-      }).catch(err=>console.log(err))
-      .finally(()=>{
-        if(idTimeOut) clearTimeout(idTimeOut);
-        idTimeOut = setTimeout(() => {
-          this.hideLoader();
-          this.showOrders(arrOrder);
-        }, 200);
-      })
+      this.getOrders(entry.type)
+        .then((res) => {
+          arrOrder = this.formatData(res);
+          if (entry.type === 3) {
+            arrOrder = this.combineData(arrOrder);
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          if (idTimeOut) clearTimeout(idTimeOut);
+          idTimeOut = setTimeout(() => {
+            this.hideLoader();
+            this.showOrders(arrOrder);
+          }, 200);
+        });
       // const res = await this.getOrders(entry.type);
       // arrOrder = this.formatData(res);
       // if (entry.type === 3) {
@@ -280,7 +282,7 @@ const order = (function () {
       // } else {
       //   this.showOrders(arrOrder);
       // }
-      // 
+      //
     },
     hideLoader() {
       loader.classList.add("hidden");
@@ -295,7 +297,7 @@ const order = (function () {
           parseInt(item.id) === parseInt(orderId) &&
           parseInt(item.kichcosanpham_id) === parseInt(pdId)
       );
-      
+
       formComment.reset();
       modalComment.querySelector(".modal-comment-name").innerHTML =
         data.chitietdonhang[0].ten;
