@@ -24,13 +24,104 @@ namespace qlshopthoitrangtreem
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Vertical;
             textBox1.Enabled = false;
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+        }
+
+        private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                sanpham sp = bllsp.laySanPhamTheoId(productId);
+
+                if (sp != null)
+                {
+                    tbMa.Text = sp.id.ToString();
+                    tbten.Text = sp.ten;
+                    tbgia.Text = sp.gia.ToString();
+                    rtbmota.Text = sp.mota;
+                    cbgioitinh.SelectedItem = sp.gioitinh;
+                    cbdanhmuc.SelectedValue = sp.DanhMuc_id;
+                    this.urlImage = sp.anhdaidien;
+                    pbanhdaidien.Image = await firebase.LoadImageFromUrl(this.urlImage);
+                }
+            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             this.xoaDlInput();
         }
+        private async void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
+                if (result == DialogResult.Yes)
+                {
+                    if (bllsp.XoaSanPham(productId))
+                    {
+                        MessageBox.Show("Xóa sản phẩm thành công!");
+                        this.dataGridView1.Rows.Clear();
+                        await this.loadData(this.trangHienTai);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa sản phẩm không thành công!");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn sản phẩm để xóa!");
+            }
+        }
+
+        private async void btnSua_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    try
+                    {
+                        int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                        sanpham sp = new sanpham
+                        {
+                            id = productId,
+                            ten = tbten.Text,
+                            gia = Double.Parse(tbgia.Text),
+                            mota = rtbmota.Text,
+                            gioitinh = cbgioitinh.SelectedItem.ToString(),
+                            DanhMuc_id = int.Parse(cbdanhmuc.SelectedValue.ToString()),
+                            anhdaidien = this.urlImage,
+                            ngaytao = DateTime.Now
+                        };
+
+                        sanpham updatedProduct = bllsp.SuaSanPham(sp);
+                        if (updatedProduct != null)
+                        {
+                            MessageBox.Show("Cập nhật sản phẩm thành công!");
+                            // Refresh the data grid view
+                            this.dataGridView1.Rows.Clear();
+                            await this.loadData(this.trangHienTai);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cập nhật sản phẩm không thành công!");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng chọn sản phẩm để sửa!");
+                }
+        }
         void xoaDlInput()
         {
             tbMa.Enabled = true;
@@ -117,7 +208,7 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
             await this.loadData(this.trangHienTai);
-        }
+        }  
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
         {
@@ -191,5 +282,7 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
         }
+
+        
     }
 }

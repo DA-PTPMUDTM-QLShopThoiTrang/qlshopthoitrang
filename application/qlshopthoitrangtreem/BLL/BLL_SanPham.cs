@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using DAL;
@@ -25,6 +26,19 @@ namespace BLL
             double tong = (double)dllsanpham.layDsSanPham().Count;
             return (int)Math.Ceiling(tong/limit);
         }
+        public sanpham laySanPhamTheoId(int id)
+        {
+            try
+            {
+                return dllsanpham.laySanPhamTheoId(id);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
         public sanpham themSanPham(string ten, string mota, double gia, string gioitinh, int danhmuc_id, string anhdaidien)
         {
             try
@@ -44,6 +58,28 @@ namespace BLL
                 return null;
             }
             return null;
+        }
+        public bool XoaSanPham(int productId)
+        {
+            try
+            {
+                return dllsanpham.xoaSanPham(productId);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public sanpham SuaSanPham(sanpham sp)
+        {
+            try
+            {
+                return dllsanpham.sua(sp);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public List<danhmuc> layDsDanhMuc()

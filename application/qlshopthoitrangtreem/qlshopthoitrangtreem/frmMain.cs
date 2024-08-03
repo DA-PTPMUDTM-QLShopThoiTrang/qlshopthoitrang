@@ -118,5 +118,7 @@ namespace qlshopthoitrangtreem
             form.MdiParent = this;
             form.Show();
         }
+
+        
     }
 }

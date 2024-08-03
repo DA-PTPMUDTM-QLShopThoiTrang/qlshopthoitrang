@@ -12,7 +12,7 @@ namespace DAL
 
         public List<sanpham> layDsSanPham()
         {
-            return dbcontext.sanphams.OrderByDescending(item=>item.ngaytao).ToList<sanpham>();
+            return dbcontext.sanphams.OrderByDescending(item => item.ngaytao).ToList<sanpham>();
         }
         public List<sanpham> layDsSanPham(int skip, int take)
         {
@@ -29,6 +29,62 @@ namespace DAL
                 dbcontext.sanphams.InsertOnSubmit(sp);
                 dbcontext.SubmitChanges();
                 return sp;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public sanpham laySanPhamTheoId(int id)
+        {
+            try
+            {
+                return dbcontext.sanphams.SingleOrDefault(p => p.id == id);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+        public bool xoaSanPham(int productId)
+        {
+            try
+            {
+                var productToDelete = dbcontext.sanphams.SingleOrDefault(p => p.id== productId);
+                if (productToDelete == null)
+                {
+                    return false;
+                }
+                dbcontext.sanphams.DeleteOnSubmit(productToDelete);
+                dbcontext.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public sanpham sua(sanpham sp)
+        {
+            try
+            {
+                var existingProduct = dbcontext.sanphams.SingleOrDefault(p => p.id == sp.id);
+                if (existingProduct == null)
+                {
+                    throw new Exception("Không tìm thấy sản phẩm cần sửa.");
+                }
+                existingProduct.ten = sp.ten;
+                existingProduct.gia = sp.gia;
+                existingProduct.mota = sp.mota;
+                existingProduct.gioitinh = sp.gioitinh;
+                existingProduct.DanhMuc_id = sp.DanhMuc_id;
+                existingProduct.ngaytao = sp.ngaytao;
+                existingProduct.anhdaidien = sp.anhdaidien;
+                dbcontext.SubmitChanges();
+                return existingProduct;
             }
             catch (Exception ex)
             {
