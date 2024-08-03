@@ -17,9 +17,9 @@ const shoppingCart = (function () {
   return {
     async getProducts(page, limit) {
       const res = await fetch(
-        `api/layspgiohang.php?userid=${userId}&sort=&limit=${
+        `api/layspgiohang.php?userid=${userId}&sort=&offset=${
           (page - 1) * limit
-        },${limit}`
+        }&limit=${limit}`
       );
       return await res.json();
     },
@@ -88,9 +88,11 @@ const shoppingCart = (function () {
             <span class="text-center w-1/5 font-semibold text-rose-500 text-sm">${this.formatPrice(
               parseFloat(item.gia)
             )}</span>
-            <span data-kcspid-${item.kcspid} class="text-center w-1/5 font-semibold text-rose-500 text-sm">${this.formatPrice(
-              parseFloat(item.gia) * parseInt(item.soluong)
-            )}</span>
+            <span data-kcspid-${
+              item.kcspid
+            } class="text-center w-1/5 font-semibold text-rose-500 text-sm">${this.formatPrice(
+          parseFloat(item.gia) * parseInt(item.soluong)
+        )}</span>
             
             <button type="button" data-remove-product="${
               item.kcspid
@@ -251,42 +253,48 @@ const shoppingCart = (function () {
               .then((res) => {
                 if (res) {
                   data.type === "decrease"
-                      ? (productItem.soluong = productItem.soluong - 1)
-                      : (productItem.soluong = productItem.soluong + 1);
-                    elm.value = productItem.soluong;
-                    products = products.map((item) => {
-                      if (item.kcspid === productItem.kcspid) {
-                        return productItem;
-                      }
-                      return item;
-                    });
-                    document.querySelector(
-                      "[data-button-change"
-                    ).dataset.buttonChange = "true";
-                    let itemGh = products.find(e=>parseInt(e.kcspid) === parseInt(productItem.kcspid));
-                    if(itemGh){
-                      document.querySelector(`[data-kcspid-${productItem.kcspid}]`).innerHTML = this.formatPrice(parseFloat(itemGh.gia) * parseFloat(itemGh.soluong));
+                    ? (productItem.soluong = productItem.soluong - 1)
+                    : (productItem.soluong = productItem.soluong + 1);
+                  elm.value = productItem.soluong;
+                  products = products.map((item) => {
+                    if (item.kcspid === productItem.kcspid) {
+                      return productItem;
                     }
-                    productChecked = productChecked.map(item=>{
-                      if(parseInt(item.kcspid) === parseInt(itemGh.kcspid))
-                        return itemGh
-                      return item;
-                    })
-                    sum.innerHTML = this.formatPrice(
-                      productChecked.reduce((prev, curv) => {
-                        return prev + curv.gia * curv.soluong;
-                      }, 0)
+                    return item;
+                  });
+                  document.querySelector(
+                    "[data-button-change"
+                  ).dataset.buttonChange = "true";
+                  let itemGh = products.find(
+                    (e) => parseInt(e.kcspid) === parseInt(productItem.kcspid)
+                  );
+                  if (itemGh) {
+                    document.querySelector(
+                      `[data-kcspid-${productItem.kcspid}]`
+                    ).innerHTML = this.formatPrice(
+                      parseFloat(itemGh.gia) * parseFloat(itemGh.soluong)
                     );
+                  }
+                  productChecked = productChecked.map((item) => {
+                    if (parseInt(item.kcspid) === parseInt(itemGh.kcspid))
+                      return itemGh;
+                    return item;
+                  });
+                  sum.innerHTML = this.formatPrice(
+                    productChecked.reduce((prev, curv) => {
+                      return prev + curv.gia * curv.soluong;
+                    }, 0)
+                  );
                 }
               })
               .catch((err) => {})
               .finally(() => {
-                if(idTimeOut) clearTimeout(idTimeOut);
-                  idTimeOut = setTimeout(() => {
-                    document
+                if (idTimeOut) clearTimeout(idTimeOut);
+                idTimeOut = setTimeout(() => {
+                  document
                     .getElementById("modal-spinner")
                     .classList.add("hidden");
-                  }, 250);
+                }, 250);
               });
           } else {
             document.getElementById("modal-spinner").classList.remove("hidden");
@@ -309,9 +317,9 @@ const shoppingCart = (function () {
                     "[data-button-change"
                   ).dataset.buttonChange = "true";
                   quantity.innerHTML = "Đã chọn: " + productChecked.length;
-                  if(productChecked.length == 0){
+                  if (productChecked.length == 0) {
                     sum.innerHTML = 0;
-                  }else{
+                  } else {
                     sum.innerHTML = this.formatPrice(
                       productChecked.reduce((prev, curv) => {
                         return prev + curv.gia * curv.soluong;
@@ -322,22 +330,22 @@ const shoppingCart = (function () {
               })
               .catch((err) => {})
               .finally(async () => {
-                if(idTimeOut) clearTimeout(idTimeOut);
-                  idTimeOut = setTimeout(async () => {
-                    document
+                if (idTimeOut) clearTimeout(idTimeOut);
+                idTimeOut = setTimeout(async () => {
+                  document
                     .getElementById("modal-spinner")
                     .classList.add("hidden");
-                    this.showLoader();
-                    containerContent.innerHTML = "";
-                    const cqt = await this.fetchQuantity(
-                      document.querySelector("#checkLogin")?.value ?? 0
-                    );
-                    document.querySelector(".cart-drawer__view").innerHTML =
-                      parseInt(cqt["sl"]) > 99 ? "99+" : cqt["sl"];
-                    this.showProducts(products);
+                  this.showLoader();
+                  containerContent.innerHTML = "";
+                  const cqt = await this.fetchQuantity(
+                    document.querySelector("#checkLogin")?.value ?? 0
+                  );
+                  document.querySelector(".cart-drawer__view").innerHTML =
+                    parseInt(cqt["sl"]) > 99 ? "99+" : cqt["sl"];
+                  this.showProducts(products);
 
-                    this.hideLoader();
-                  }, 250);
+                  this.hideLoader();
+                }, 250);
               });
           }
         }

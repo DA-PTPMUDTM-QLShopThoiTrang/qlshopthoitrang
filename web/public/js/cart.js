@@ -13,7 +13,7 @@ const cart = (function () {
     },
     async fetchProduct(userId) {
       const res = await fetch(
-        `api/layspgiohang.php?userid=${userId}&sort=desc&limit=4`
+        `api/layspgiohang.php?userid=${userId}&sort=desc&offset=0&limit=4`
       );
       const data = await res.json();
       return data;
