@@ -24,14 +24,14 @@ namespace qlshopthoitrangtreem
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Vertical;
             textBox1.Enabled = false;
-            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+           
         }
 
         private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ma"].Value);
                 sanpham sp = bllsp.laySanPhamTheoId(productId);
 
                 if (sp != null)
@@ -208,6 +208,7 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
             await this.loadData(this.trangHienTai);
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
         }  
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
