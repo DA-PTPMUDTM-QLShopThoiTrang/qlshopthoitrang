@@ -44,11 +44,6 @@ select TOP 5 sanpham.id, sanpham.ten, sanpham.gia, sanpham.gioitinh, sanpham.nga
                  order by sanpham.ngaytao desc 
 ");
 
-
-$idd = $db->insertNonParam("insert into danhmuc values(N'Test')");
-echo $idd;
-
-
 ?>
 <div class="xl:container mx-auto lg:container sm:container pt-8 ">
     <div class="relative flex flex-col mb-12 overflow-hidden text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
