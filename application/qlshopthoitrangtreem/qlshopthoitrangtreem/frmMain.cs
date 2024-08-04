@@ -119,6 +119,25 @@ namespace qlshopthoitrangtreem
             form.Show();
         }
 
-        
+        private void loạiSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLoaiSP form = new frmLoaiSP();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLKhachHang form = new frmQLKhachHang();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void kíchCỡSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmKichCo frm = new frmKichCo();
+            frm.MdiParent = this;
+            frm.Show();
+        }
     }
 }

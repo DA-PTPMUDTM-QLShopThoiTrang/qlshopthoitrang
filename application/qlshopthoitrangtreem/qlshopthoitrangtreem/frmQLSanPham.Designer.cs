@@ -128,11 +128,12 @@ namespace qlshopthoitrangtreem
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(332, 580);
+            this.progressBar1.Location = new System.Drawing.Point(332, 584);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(112, 29);
             this.progressBar1.TabIndex = 21;
+           
             // 
             // tbgia
             // 
@@ -153,7 +154,7 @@ namespace qlshopthoitrangtreem
             // 
             // btnTaiAnh
             // 
-            this.btnTaiAnh.Location = new System.Drawing.Point(332, 489);
+            this.btnTaiAnh.Location = new System.Drawing.Point(332, 493);
             this.btnTaiAnh.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnTaiAnh.Name = "btnTaiAnh";
             this.btnTaiAnh.Size = new System.Drawing.Size(112, 42);
@@ -209,11 +210,12 @@ namespace qlshopthoitrangtreem
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 489);
+            this.label7.Location = new System.Drawing.Point(26, 493);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(97, 20);
             this.label7.TabIndex = 13;
             this.label7.Text = "Ảnh đại diện";
+       
             // 
             // label6
             // 
@@ -293,12 +295,13 @@ namespace qlshopthoitrangtreem
             // pbanhdaidien
             // 
             this.pbanhdaidien.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbanhdaidien.Location = new System.Drawing.Point(137, 489);
+            this.pbanhdaidien.Location = new System.Drawing.Point(137, 493);
             this.pbanhdaidien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pbanhdaidien.Name = "pbanhdaidien";
             this.pbanhdaidien.Size = new System.Drawing.Size(124, 143);
             this.pbanhdaidien.TabIndex = 2;
             this.pbanhdaidien.TabStop = false;
+          
             // 
             // tbMa
             // 
@@ -361,7 +364,7 @@ namespace qlshopthoitrangtreem
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(632, 650);
             this.dataGridView1.TabIndex = 0;
-           
+            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged_1);
             // 
             // ma
             // 

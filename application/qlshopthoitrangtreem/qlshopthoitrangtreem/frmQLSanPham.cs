@@ -24,28 +24,8 @@ namespace qlshopthoitrangtreem
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Vertical;
             textBox1.Enabled = false;
-            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
-        }
-
-        private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridView1.SelectedRows.Count > 0)
-            {
-                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
-                sanpham sp = bllsp.laySanPhamTheoId(productId);
-
-                if (sp != null)
-                {
-                    tbMa.Text = sp.id.ToString();
-                    tbten.Text = sp.ten;
-                    tbgia.Text = sp.gia.ToString();
-                    rtbmota.Text = sp.mota;
-                    cbgioitinh.SelectedItem = sp.gioitinh;
-                    cbdanhmuc.SelectedValue = sp.DanhMuc_id;
-                    this.urlImage = sp.anhdaidien;
-                    pbanhdaidien.Image = await firebase.LoadImageFromUrl(this.urlImage);
-                }
-            }
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.MultiSelect = false;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -56,7 +36,7 @@ namespace qlshopthoitrangtreem
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ma"].Value);
                 var result = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
@@ -86,13 +66,13 @@ namespace qlshopthoitrangtreem
                 {
                     try
                     {
-                        int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                        int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ma"].Value);
                         sanpham sp = new sanpham
                         {
                             id = productId,
-                            ten = tbten.Text,
-                            gia = Double.Parse(tbgia.Text),
-                            mota = rtbmota.Text,
+                            ten = tbten.Text.Trim(),
+                            gia = Double.Parse(tbgia.Text.Trim()),
+                            mota = rtbmota.Text.Trim(),
                             gioitinh = cbgioitinh.SelectedItem.ToString(),
                             DanhMuc_id = int.Parse(cbdanhmuc.SelectedValue.ToString()),
                             anhdaidien = this.urlImage,
@@ -208,7 +188,9 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
             await this.loadData(this.trangHienTai);
-        }  
+        }
+
+      
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
         {
@@ -283,6 +265,27 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTiep();
         }
 
-        
+        private async void dataGridView1_SelectionChanged_1(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ma"].Value);
+                sanpham sp = bllsp.laySanPhamTheoId(productId);
+
+                if (sp != null)
+                {
+                    tbMa.Text = sp.id.ToString();
+                    tbten.Text = sp.ten;
+                    tbgia.Text = sp.gia.ToString();
+                    rtbmota.Text = sp.mota;
+                    cbgioitinh.SelectedItem = sp.gioitinh;
+                    cbdanhmuc.SelectedValue = sp.DanhMuc_id;
+                    this.urlImage = sp.anhdaidien;
+                    pbanhdaidien.Image = await firebase.LoadImageFromUrl(this.urlImage);
+                }
+            }
+        }
+
+       
     }
 }

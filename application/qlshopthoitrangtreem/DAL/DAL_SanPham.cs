@@ -14,6 +14,14 @@ namespace DAL
         {
             return dbcontext.sanphams.OrderByDescending(item => item.ngaytao).ToList<sanpham>();
         }
+        public List<loaisanpham> layLoaiSP()
+        {
+            return dbcontext.loaisanphams.Select(l => l).ToList<loaisanpham>();
+        }
+        public List<kichcosanpham> layKichCoSP()
+        {
+            return dbcontext.kichcosanphams.Select(k => k).ToList<kichcosanpham>();
+        }
         public List<sanpham> layDsSanPham(int skip, int take)
         {
             return dbcontext.sanphams.OrderByDescending(item => item.ngaytao).Skip(skip).Take(take).ToList<sanpham>();
@@ -35,6 +43,32 @@ namespace DAL
                 throw;
             }
         }
+        public loaisanpham them(loaisanpham l)
+        {
+            try
+            {
+                dbcontext.loaisanphams.InsertOnSubmit(l);
+                dbcontext.SubmitChanges();
+                return l;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public kichcosanpham themKichCo(kichcosanpham k)
+        {
+            try
+            {
+                dbcontext.kichcosanphams.InsertOnSubmit(k);
+                dbcontext.SubmitChanges();
+                return k;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public sanpham laySanPhamTheoId(int id)
         {
             try
@@ -43,9 +77,51 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                // Log the exception
                 Console.WriteLine($"Error: {ex.Message}");
                 return null;
+            }
+        }
+        public kichcosanpham layKichCoTheoID(int kID)
+        {
+            try
+            {
+                return dbcontext.kichcosanphams.SingleOrDefault(p => p.id == kID);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+        public loaisanpham layLoaiTheoId(int id)
+        {
+            try
+            {
+                return dbcontext.loaisanphams.SingleOrDefault(p => p.id == id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return null;
+            }
+        }
+        public bool xoaKichCo(int kId)
+        {
+            try
+            {
+                var xoa = dbcontext.kichcosanphams.SingleOrDefault(p => p.id == kId);
+                if (xoa == null)
+                {
+                    return false;
+                }
+                dbcontext.kichcosanphams.DeleteOnSubmit(xoa);
+                dbcontext.SubmitChanges();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
         public bool xoaSanPham(int productId)
@@ -61,6 +137,27 @@ namespace DAL
                 dbcontext.SubmitChanges();
 
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public kichcosanpham suaKichCo(kichcosanpham k)
+        {
+            try
+            {
+                var sua = dbcontext.kichcosanphams.SingleOrDefault(p => p.id == k.id);
+                if (sua == null)
+                {
+                    throw new Exception("Không tìm thấy kích cỡ cần sửa.");
+                }
+                sua.soluong = k.soluong;
+                sua.kichco = k.kichco;
+                sua.LoaiSanPham_id = k.LoaiSanPham_id;
+                sua.SanPham_id = k.SanPham_id;
+                dbcontext.SubmitChanges();
+                return sua;
             }
             catch (Exception ex)
             {
@@ -91,10 +188,32 @@ namespace DAL
                 throw;
             }
         }
+
+        public loaisanpham suaLoai(loaisanpham l)
+        {
+            try
+            {
+                var existingProduct = dbcontext.loaisanphams.SingleOrDefault(p => p.id == l.id);
+                if (existingProduct == null)
+                {
+                    throw new Exception("Không tìm thấy loại cần sửa.");
+                }
+                existingProduct.mausac = l.mausac;
+                existingProduct.SanPham_id = l.SanPham_id;
+                existingProduct.hinhanh = l.hinhanh;
+                dbcontext.SubmitChanges();
+                return existingProduct;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public List<danhmuc> layDsDanhMuc()
         {
             return dbcontext.danhmucs.ToList<danhmuc>();
         }
+        
         /*public bool capNhat(DM_ManHinh dmmh)
         {
             DM_ManHinh manHinh = dbcontext.DM_ManHinhs.SingleOrDefault(mh => mh.MaManHinh == dmmh.MaManHinh);
