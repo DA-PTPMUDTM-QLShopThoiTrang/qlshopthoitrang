@@ -37,8 +37,10 @@ namespace qlshopthoitrangtreem
             this.thêmNhómToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mànHìnhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thêmSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýĐơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.đơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +50,8 @@ namespace qlshopthoitrangtreem
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hệThốngToolStripMenuItem,
             this.quảnLýSảnPhẩmToolStripMenuItem,
-            this.quảnLýKháchHàngToolStripMenuItem});
+            this.quảnLýKháchHàngToolStripMenuItem,
+            this.quảnLýĐơnHàngToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1193, 28);
@@ -125,18 +128,33 @@ namespace qlshopthoitrangtreem
             this.quảnLýSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(141, 24);
             this.quảnLýSảnPhẩmToolStripMenuItem.Text = "Quản lý sản phẩm";
             // 
+            // thêmSảnPhẩmToolStripMenuItem
+            // 
+            this.thêmSảnPhẩmToolStripMenuItem.Name = "thêmSảnPhẩmToolStripMenuItem";
+            this.thêmSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(197, 26);
+            this.thêmSảnPhẩmToolStripMenuItem.Text = "Thêm sản phẩm";
+            this.thêmSảnPhẩmToolStripMenuItem.Click += new System.EventHandler(this.thêmSảnPhẩmToolStripMenuItem_Click);
+            // 
             // quảnLýKháchHàngToolStripMenuItem
             // 
             this.quảnLýKháchHàngToolStripMenuItem.Name = "quảnLýKháchHàngToolStripMenuItem";
             this.quảnLýKháchHàngToolStripMenuItem.Size = new System.Drawing.Size(152, 24);
             this.quảnLýKháchHàngToolStripMenuItem.Text = "Quản lý khách hàng";
             // 
-            // thêmSảnPhẩmToolStripMenuItem
+            // quảnLýĐơnHàngToolStripMenuItem
             // 
-            this.thêmSảnPhẩmToolStripMenuItem.Name = "thêmSảnPhẩmToolStripMenuItem";
-            this.thêmSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.thêmSảnPhẩmToolStripMenuItem.Text = "Thêm sản phẩm";
-            this.thêmSảnPhẩmToolStripMenuItem.Click += new System.EventHandler(this.thêmSảnPhẩmToolStripMenuItem_Click);
+            this.quảnLýĐơnHàngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.đơnHàngToolStripMenuItem});
+            this.quảnLýĐơnHàngToolStripMenuItem.Name = "quảnLýĐơnHàngToolStripMenuItem";
+            this.quảnLýĐơnHàngToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
+            this.quảnLýĐơnHàngToolStripMenuItem.Text = "Quản lý đơn hàng";
+            // 
+            // đơnHàngToolStripMenuItem
+            // 
+            this.đơnHàngToolStripMenuItem.Name = "đơnHàngToolStripMenuItem";
+            this.đơnHàngToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.đơnHàngToolStripMenuItem.Text = "Đơn hàng";
+            this.đơnHàngToolStripMenuItem.Click += new System.EventHandler(this.đơnHàngToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -170,5 +188,7 @@ namespace qlshopthoitrangtreem
         private System.Windows.Forms.ToolStripMenuItem quảnLýSảnPhẩmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýKháchHàngToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem thêmSảnPhẩmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýĐơnHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem đơnHàngToolStripMenuItem;
     }
 }
