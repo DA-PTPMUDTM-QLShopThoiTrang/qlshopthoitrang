@@ -24,8 +24,33 @@ namespace qlshopthoitrangtreem
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Vertical;
             textBox1.Enabled = false;
+<<<<<<< HEAD
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
+=======
+           
+        }
+
+        private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int productId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["ma"].Value);
+                sanpham sp = bllsp.laySanPhamTheoId(productId);
+
+                if (sp != null)
+                {
+                    tbMa.Text = sp.id.ToString();
+                    tbten.Text = sp.ten;
+                    tbgia.Text = sp.gia.ToString();
+                    rtbmota.Text = sp.mota;
+                    cbgioitinh.SelectedItem = sp.gioitinh;
+                    cbdanhmuc.SelectedValue = sp.DanhMuc_id;
+                    this.urlImage = sp.anhdaidien;
+                    pbanhdaidien.Image = await firebase.LoadImageFromUrl(this.urlImage);
+                }
+            }
+>>>>>>> 12632a155e64363db8301739a1bfa07b6ba63992
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -188,9 +213,14 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
             await this.loadData(this.trangHienTai);
+<<<<<<< HEAD
         }
 
       
+=======
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+        }  
+>>>>>>> 12632a155e64363db8301739a1bfa07b6ba63992
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
         {
