@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{918AADB6-AA20-47BB-ADBC-8D1FE2FE5078}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ML_QLThoiTrangTreEmWebApi", "ML_QLThoiTrangTreEmWebApi\ML_QLThoiTrangTreEmWebApi.csproj", "{55249647-88C4-4584-9B4F-6851FB91A437}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{918AADB6-AA20-47BB-ADBC-8D1FE2FE5078}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918AADB6-AA20-47BB-ADBC-8D1FE2FE5078}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918AADB6-AA20-47BB-ADBC-8D1FE2FE5078}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55249647-88C4-4584-9B4F-6851FB91A437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55249647-88C4-4584-9B4F-6851FB91A437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55249647-88C4-4584-9B4F-6851FB91A437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55249647-88C4-4584-9B4F-6851FB91A437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
