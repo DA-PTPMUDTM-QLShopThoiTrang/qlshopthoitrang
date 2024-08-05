@@ -22,6 +22,21 @@ view('header', ['title' => $sp['ten'], "decs" => $sp['ten'] . " - " . $sp['mota'
 
 ?>
 
+<style>
+    @keyframes progress-animation {
+        0% {
+            width: 0%;
+        }
+
+        100% {
+            width: 100%;
+        }
+    }
+
+    .progress-bar {
+        animation: progress-animation 1s linear forwards;
+    }
+</style>
 <main>
     <section class="py-12 pt-4 sm:py-16 sm:pt-4">
         <div class="container mx-auto px-4">
@@ -54,8 +69,8 @@ view('header', ['title' => $sp['ten'], "decs" => $sp['ten'] . " - " . $sp['mota'
                             <div id="tab_gallery" class="flex flex-row items-start lg:flex-col lg:gap-0 gap-4">
                                 <button type="button" class="border-green-500 border-4
                                 flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg border-2 border-[#dee2e6] border-solid text-center">
-                                            <img src="<?php echo $sp['anhdaidien'] ?>" alt="img">
-                                        </button>
+                                    <img src="<?php echo $sp['anhdaidien'] ?>" alt="img">
+                                </button>
                                 <?php
                                 $indexActive = 0;
                                 foreach ($loaiSanPham as $lsp) { ?>
@@ -63,7 +78,7 @@ view('header', ['title' => $sp['ten'], "decs" => $sp['ten'] . " - " . $sp['mota'
                                     flex-0 aspect-square mb-3 h-20 overflow-hidden rounded-lg  border-solid text-center">
                                         <img data-lsphaid-<?php echo $lsp['id'] ?? "" ?> src="<?php echo $lsp['hinhanh'] ?>" alt="img">
                                     </button>
-                                   <?php $indexActive++;
+                                <?php $indexActive++;
                                 }
                                 ?>
                             </div>
@@ -144,7 +159,13 @@ view('header', ['title' => $sp['ten'], "decs" => $sp['ten'] . " - " . $sp['mota'
                             </div>
                         </div>
                         <div class="mt-2 errColor hidden  md:text-base text-sm text-red-500"></div>
-                        <h2 class="mt-4 text-base text-gray-900">Size</h2>
+                        <div class="mt-4 flex items-center justify-between">
+                            <h2 class="text-base text-gray-900">Size</h2>
+                            <button id="btn-open-ai" type="button" class="flex items-center gap-2 hover:text-[#7c3aed]">
+                                <img class="h-5 w-5" src="./public/images/ai-technology.png" alt="icon ai" />
+                                Giợi ý chọn size
+                            </button>
+                        </div>
                         <div id="container__size" class="mt-3 flex select-none flex-wrap items-center gap-1">
 
                         </div>
@@ -483,8 +504,76 @@ view('header', ['title' => $sp['ten'], "decs" => $sp['ten'] . " - " . $sp['mota'
 
     </div>
 </div>
+<div id="modal-ai" class="hidden inset-0 transition z-[200]">
+    <div class="absolute inset-0"></div>
+    <div id="container__ai" class=" bg-gray-600 bg-opacity-40 relative h-full w-full ml-auto z-[201] p-2 flex justify-center items-center">
+        <div class="container mx-auto">
+            <form id="form-ai" method="POST" class="relative max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+                <button type="button" id="btn-close-ai" class="absolute top-0 right-0 z-10">
+                    <svg class="hover:text-violet-600 cursor-pointer m-3 w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6" />
+                    </svg>
+                </button>
+                <div class="mb-3 mt-2">
+                    <img class="mx-auto h-10 w-10" src="./public/images/robot.png" alt="img-ai" />
+                </div>
+                <div class="mb-3">
+                    <label for="ai_age" class="block mb-2 text-sm font-medium text-gray-900 ">Tuổi</label>
+                    <input type="text" id="ai_age" name="ai_age" class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required />
+                    <span class="errai_age hidden md:text-base text-sm text-red-500"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="ai_height" class="block mb-2 text-sm font-medium text-gray-900 ">Chiều cao (cm)</label>
+                    <input type="text" id="ai_height" name="ai_height" class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required />
+                    <span class="errai_height hidden md:text-base text-sm text-red-500"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="ai_weight" class="block mb-2 text-sm font-medium text-gray-900 ">Cân nặng (kg)</label>
+                    <input type="text" id="ai_weight" name="ai_weight" class="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required />
+                    <span class="errai_weight hidden md:text-base text-sm text-red-500"></span>
+                </div>
+                <div class="mb-3">
+                    <h6 class="block mb-2 text-sm font-medium text-gray-900 ">Kết quả</h6>
+                    <div class="h-[144px]">
+                        <div id="modal-ai__content" class="hidden space-y-3 ">
+                            <!-- render -->
+                        </div>
+                        <div id="modal-ai__loading" class="z-10 hidden  space-y-3 mt-2">
+                            <div class="w-full animate-pulse">
+                                <div class="h-3 bg-gray-200 rounded-full mb-2 w-[25%] py-0.5 px-1.5">
+                                </div>
+                                <div class=" w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                                </div>
+                            </div>
+                            <div class="w-full animate-pulse">
+                                <div class="h-3 bg-gray-200 rounded-full mb-2 w-[45%] py-0.5 px-1.5">
+                                </div>
+                                <div class=" w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                                </div>
+                            </div>
+                            <div class="w-full animate-pulse">
+                                <div class="h-3 bg-gray-200 rounded-full mb-2 w-[65%] py-0.5 px-1.5">
+                                </div>
+                                <div class=" w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="modal-ai__img" class=" space-y-3">
+                            <img class="mx-auto" src="./public/images/chat-bot.png" alt="image" />
+                        </div>
+                    </div>
+                </div>
+                <span class="errmodal-ai hidden md:text-base text-sm text-red-500"></span>
+                <div class="flex items-center gap-3 justify-end mt-4">
+                    <button type="submit" class="text-white bg-gradient-to-r from-violet-500 to-purple-500 hover:opacity-80 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Tìm gợi ý</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="./public/js/productDetail.js"></script>
 <script type="text/javascript" src="./public/js/tabGallery.js"></script>
+<script type="text/javascript" src="./public/js/recommendsize.js"></script>
 <?php
 include_once("./includes/footer.php")
 ?>
