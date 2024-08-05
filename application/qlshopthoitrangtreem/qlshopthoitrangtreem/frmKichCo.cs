@@ -208,5 +208,50 @@ namespace qlshopthoitrangtreem
                 MessageBox.Show($"Đã xảy ra lỗi: {err.Message}");
             }
         }
+        private void loadLoaiForSelectedProduct()
+        {
+            if (cboSP.SelectedValue != null && int.TryParse(cboSP.SelectedValue.ToString(), out int sanPhamId))
+            {
+                var loaiList = bll.loadLoaiSP().Where(l => l.SanPham_id == sanPhamId).ToList();
+                cboLoai.DataSource = loaiList;
+                cboLoai.DisplayMember = "mausac";
+                cboLoai.ValueMember = "id";
+            }
+        }
+        private void loadDataForSelectedType()
+        {
+            if (cboLoai.SelectedValue != null && int.TryParse(cboLoai.SelectedValue.ToString(), out int loaiId))
+            {
+                dataGridView1.Rows.Clear();
+                List<kichcosanpham> dsSP = bll.loadKichCo().Where(k => k.LoaiSanPham_id == loaiId).ToList();
+                foreach (kichcosanpham item in dsSP)
+                {
+                    var sanPham = bll.layDsSP().FirstOrDefault(sp => sp.id == item.SanPham_id);
+                    var loaiSP = bll.loadLoaiSP().FirstOrDefault(l => l.id == item.LoaiSanPham_id);
+
+                    string sanPhamName = sanPham != null ? sanPham.ten : "Unknown";
+                    string loaiSPName = loaiSP != null ? loaiSP.mausac : "Unknown";
+
+                    dataGridView1.Invoke((MethodInvoker)delegate
+                    {
+                        dataGridView1.Rows.Add(new object[] { item.id, item.kichco, item.soluong, sanPhamName, loaiSPName });
+                    });
+                }
+            }
+        }
+        private void cboSP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadLoaiForSelectedProduct();
+        }
+
+        private void cboLoai_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadDataForSelectedType();
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            loadData();
+        }
     }
 }

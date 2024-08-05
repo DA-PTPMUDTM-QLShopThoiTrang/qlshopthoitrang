@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kichco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loaisanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cboSP = new System.Windows.Forms.ComboBox();
             this.cboLoai = new System.Windows.Forms.ComboBox();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
@@ -42,12 +47,8 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.txtKichCo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kichco = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.soluong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loaisanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnLuu = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +68,41 @@
             this.dataGridView1.Size = new System.Drawing.Size(787, 203);
             this.dataGridView1.TabIndex = 0;
             // 
+            // id
+            // 
+            this.id.HeaderText = "Id";
+            this.id.MinimumWidth = 8;
+            this.id.Name = "id";
+            this.id.Width = 150;
+            // 
+            // kichco
+            // 
+            this.kichco.HeaderText = "Kích cỡ";
+            this.kichco.MinimumWidth = 8;
+            this.kichco.Name = "kichco";
+            this.kichco.Width = 150;
+            // 
+            // soluong
+            // 
+            this.soluong.HeaderText = "Số lượng";
+            this.soluong.MinimumWidth = 8;
+            this.soluong.Name = "soluong";
+            this.soluong.Width = 150;
+            // 
+            // sanpham
+            // 
+            this.sanpham.HeaderText = "Sản phẩm";
+            this.sanpham.MinimumWidth = 8;
+            this.sanpham.Name = "sanpham";
+            this.sanpham.Width = 150;
+            // 
+            // loaisanpham
+            // 
+            this.loaisanpham.HeaderText = "Loại sản phẩm";
+            this.loaisanpham.MinimumWidth = 8;
+            this.loaisanpham.Name = "loaisanpham";
+            this.loaisanpham.Width = 150;
+            // 
             // cboSP
             // 
             this.cboSP.FormattingEnabled = true;
@@ -74,6 +110,7 @@
             this.cboSP.Name = "cboSP";
             this.cboSP.Size = new System.Drawing.Size(121, 28);
             this.cboSP.TabIndex = 1;
+            this.cboSP.SelectedIndexChanged += new System.EventHandler(this.cboSP_SelectedIndexChanged);
             // 
             // cboLoai
             // 
@@ -82,6 +119,7 @@
             this.cboLoai.Name = "cboLoai";
             this.cboLoai.Size = new System.Drawing.Size(121, 28);
             this.cboLoai.TabIndex = 2;
+            this.cboLoai.SelectedIndexChanged += new System.EventHandler(this.cboLoai_SelectedIndexChanged);
             // 
             // txtSoLuong
             // 
@@ -179,41 +217,6 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "Kích cỡ";
             // 
-            // id
-            // 
-            this.id.HeaderText = "Id";
-            this.id.MinimumWidth = 8;
-            this.id.Name = "id";
-            this.id.Width = 150;
-            // 
-            // kichco
-            // 
-            this.kichco.HeaderText = "Kích cỡ";
-            this.kichco.MinimumWidth = 8;
-            this.kichco.Name = "kichco";
-            this.kichco.Width = 150;
-            // 
-            // soluong
-            // 
-            this.soluong.HeaderText = "Số lượng";
-            this.soluong.MinimumWidth = 8;
-            this.soluong.Name = "soluong";
-            this.soluong.Width = 150;
-            // 
-            // sanpham
-            // 
-            this.sanpham.HeaderText = "Sản phẩm";
-            this.sanpham.MinimumWidth = 8;
-            this.sanpham.Name = "sanpham";
-            this.sanpham.Width = 150;
-            // 
-            // loaisanpham
-            // 
-            this.loaisanpham.HeaderText = "Loại sản phẩm";
-            this.loaisanpham.MinimumWidth = 8;
-            this.loaisanpham.Name = "loaisanpham";
-            this.loaisanpham.Width = 150;
-            // 
             // btnLuu
             // 
             this.btnLuu.Location = new System.Drawing.Point(958, 198);
@@ -224,11 +227,22 @@
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(24, 255);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(75, 37);
+            this.btnLoad.TabIndex = 15;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // frmKichCo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 470);
+            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtKichCo);
@@ -275,5 +289,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sanpham;
         private System.Windows.Forms.DataGridViewTextBoxColumn loaisanpham;
         private System.Windows.Forms.Button btnLuu;
+        private System.Windows.Forms.Button btnLoad;
     }
 }

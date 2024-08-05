@@ -24,11 +24,9 @@ namespace qlshopthoitrangtreem
             dataGridView1.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridView1.ScrollBars = ScrollBars.Vertical;
             textBox1.Enabled = false;
-<<<<<<< HEAD
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
-=======
-           
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
         }
 
         private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -50,7 +48,6 @@ namespace qlshopthoitrangtreem
                     pbanhdaidien.Image = await firebase.LoadImageFromUrl(this.urlImage);
                 }
             }
->>>>>>> 12632a155e64363db8301739a1bfa07b6ba63992
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -213,14 +210,9 @@ namespace qlshopthoitrangtreem
             this.capNhatBtnTroLai();
             this.capNhatBtnTiep();
             await this.loadData(this.trangHienTai);
-<<<<<<< HEAD
         }
-
-      
-=======
-            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
-        }  
->>>>>>> 12632a155e64363db8301739a1bfa07b6ba63992
+            
+ 
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
         {

@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mausac = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hinhanh = new System.Windows.Forms.DataGridViewImageColumn();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
@@ -43,10 +47,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mausac = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sanpham = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hinhanh = new System.Windows.Forms.DataGridViewImageColumn();
+            this.btnLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbanhdaidien)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +66,34 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(931, 238);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "ID";
+            this.id.MinimumWidth = 8;
+            this.id.Name = "id";
+            this.id.Width = 150;
+            // 
+            // mausac
+            // 
+            this.mausac.HeaderText = "Màu sắc";
+            this.mausac.MinimumWidth = 8;
+            this.mausac.Name = "mausac";
+            this.mausac.Width = 150;
+            // 
+            // sanpham
+            // 
+            this.sanpham.HeaderText = "Sản phẩm";
+            this.sanpham.MinimumWidth = 8;
+            this.sanpham.Name = "sanpham";
+            this.sanpham.Width = 150;
+            // 
+            // hinhanh
+            // 
+            this.hinhanh.HeaderText = "Hình ";
+            this.hinhanh.MinimumWidth = 8;
+            this.hinhanh.Name = "hinhanh";
+            this.hinhanh.Width = 150;
             // 
             // btnThem
             // 
@@ -102,6 +131,7 @@
             this.cboSP.Name = "cboSP";
             this.cboSP.Size = new System.Drawing.Size(138, 28);
             this.cboSP.TabIndex = 4;
+            this.cboSP.SelectedIndexChanged += new System.EventHandler(this.cboSP_SelectedIndexChanged);
             // 
             // txtID
             // 
@@ -192,39 +222,22 @@
             this.btnLuu.UseVisualStyleBackColor = true;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
-            // id
+            // btnLoad
             // 
-            this.id.HeaderText = "ID";
-            this.id.MinimumWidth = 8;
-            this.id.Name = "id";
-            this.id.Width = 150;
-            // 
-            // mausac
-            // 
-            this.mausac.HeaderText = "Màu sắc";
-            this.mausac.MinimumWidth = 8;
-            this.mausac.Name = "mausac";
-            this.mausac.Width = 150;
-            // 
-            // sanpham
-            // 
-            this.sanpham.HeaderText = "Sản phẩm";
-            this.sanpham.MinimumWidth = 8;
-            this.sanpham.Name = "sanpham";
-            this.sanpham.Width = 150;
-            // 
-            // hinhanh
-            // 
-            this.hinhanh.HeaderText = "Hình ";
-            this.hinhanh.MinimumWidth = 8;
-            this.hinhanh.Name = "hinhanh";
-            this.hinhanh.Width = 150;
+            this.btnLoad.Location = new System.Drawing.Point(133, 432);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(102, 47);
+            this.btnLoad.TabIndex = 31;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // frmLoaiSP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 527);
+            this.Controls.Add(this.btnLoad);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -271,5 +284,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn mausac;
         private System.Windows.Forms.DataGridViewTextBoxColumn sanpham;
         private System.Windows.Forms.DataGridViewImageColumn hinhanh;
+        private System.Windows.Forms.Button btnLoad;
     }
 }

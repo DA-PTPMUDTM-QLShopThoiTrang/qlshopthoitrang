@@ -99,9 +99,13 @@ namespace qlshopthoitrangtreem
             pbanhdaidien.Image = null;
             this.progressBar1.Value = 0;
         }
-        public async Task loadData()
+        public async Task loadData(int? spID = null)
         {
             List<loaisanpham> dsSP = bllsp.loadLoaiSP();
+            if (spID.HasValue)
+            {
+                dsSP = dsSP.Where(l => l.SanPham_id == spID.Value).ToList();
+            }
             List<Task> tasks = new List<Task>();
             foreach (loaisanpham item in dsSP)
             {
@@ -197,6 +201,20 @@ namespace qlshopthoitrangtreem
             {
                 MessageBox.Show("Vui lòng chọn loại để sửa!");
             }
+        }
+
+        private async void cboSP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboSP.SelectedValue != null && int.TryParse(cboSP.SelectedValue.ToString(), out int selectedProductId))
+            {
+                dataGridView1.Rows.Clear();
+                await loadData(selectedProductId);
+            }
+        }
+
+        private async void btnLoad_Click(object sender, EventArgs e)
+        {
+            await this.loadData();
         }
     }
 }
