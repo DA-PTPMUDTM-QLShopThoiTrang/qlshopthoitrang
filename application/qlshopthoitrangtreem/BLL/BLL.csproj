@@ -44,12 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL_DanhMuc.cs" />
     <Compile Include="BLL_SanPham.cs" />
     <Compile Include="BLL_QLPhanQuyen.cs" />
     <Compile Include="BLL_NguoiDungNhomNguoiDung.cs" />
     <Compile Include="BLL_NhomNguoiDung.cs" />
     <Compile Include="BLL_ManHinh.cs" />
     <Compile Include="BLL_NguoiDung.cs" />
+    <Compile Include="BLL_ThongKe.cs" />
     <Compile Include="LoginResultEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QL_NguoiDung;
 
 
 
@@ -15,7 +14,6 @@ namespace ThuVienControl
 {
     public partial class ctDangNhap: UserControl
     {
-        Ql_NguoiDung Ql_NguoiDung = new Ql_NguoiDung();
         public ctDangNhap()
         {
             InitializeComponent();

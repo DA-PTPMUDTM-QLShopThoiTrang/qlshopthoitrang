@@ -118,5 +118,19 @@ namespace qlshopthoitrangtreem
             form.MdiParent = this;
             form.Show();
         }
+
+        private void danhMụcToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmDanhMuc form = new frmDanhMuc();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void thốngKêDoangThuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmThongKe form = new frmThongKe();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }
