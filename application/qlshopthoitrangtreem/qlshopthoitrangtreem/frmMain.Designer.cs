@@ -41,6 +41,9 @@ namespace qlshopthoitrangtreem
             this.loạiSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kíchCỡSảnPhẩmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýKháchHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quảnLýĐơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.đơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +54,8 @@ namespace qlshopthoitrangtreem
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hệThốngToolStripMenuItem,
             this.quảnLýSảnPhẩmToolStripMenuItem,
-            this.quảnLýKháchHàngToolStripMenuItem});
+            this.quảnLýKháchHàngToolStripMenuItem,
+            this.quảnLýĐơnHàngToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -158,6 +162,20 @@ namespace qlshopthoitrangtreem
             this.kíchCỡSảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.kíchCỡSảnPhẩmToolStripMenuItem.Text = "Kích cỡ sản phẩm";
             this.kíchCỡSảnPhẩmToolStripMenuItem.Click += new System.EventHandler(this.kíchCỡSảnPhẩmToolStripMenuItem_Click);
+            // quảnLýĐơnHàngToolStripMenuItem
+            // 
+            this.quảnLýĐơnHàngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.đơnHàngToolStripMenuItem});
+            this.quảnLýĐơnHàngToolStripMenuItem.Name = "quảnLýĐơnHàngToolStripMenuItem";
+            this.quảnLýĐơnHàngToolStripMenuItem.Size = new System.Drawing.Size(140, 24);
+            this.quảnLýĐơnHàngToolStripMenuItem.Text = "Quản lý đơn hàng";
+            // 
+            // đơnHàngToolStripMenuItem
+            // 
+            this.đơnHàngToolStripMenuItem.Name = "đơnHàngToolStripMenuItem";
+            this.đơnHàngToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.đơnHàngToolStripMenuItem.Text = "Đơn hàng";
+            this.đơnHàngToolStripMenuItem.Click += new System.EventHandler(this.đơnHàngToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -194,5 +212,7 @@ namespace qlshopthoitrangtreem
         private System.Windows.Forms.ToolStripMenuItem thêmSảnPhẩmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loạiSảnPhẩmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kíchCỡSảnPhẩmToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quảnLýĐơnHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem đơnHàngToolStripMenuItem;
     }
 }
