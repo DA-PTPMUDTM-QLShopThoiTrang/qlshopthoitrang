@@ -173,8 +173,8 @@ const productDetail = (function () {
                     <div>
                         <p class=" text-sm text-gray-600 ">
                         <time pubdate datetime="2022-06-23" title="${
-                          item.ngaytao
-                        }">${item.ngaytao} </time>| Phân loại hàng:
+                          item.ngaytao["date"]
+                        }">${item.ngaytao["date"]} </time>| Phân loại hàng:
                         <span>${item.mausac},${item.kichco}</span>
                     </p>
                     </div>
@@ -244,7 +244,9 @@ const productDetail = (function () {
         btnColor.forEach((btnRadio) => {
           btnRadio.addEventListener("change", async () => {
             loading.classList.remove("hidden");
-            document.getElementById("img_active").src= document.querySelector(`[data-lsphaid-${btnRadio.value}]`).src;
+            document.getElementById("img_active").src = document.querySelector(
+              `[data-lsphaid-${btnRadio.value}]`
+            ).src;
             const data = await this.fetchDataGet(
               `api/laykichcosanpham.php?sanphamid=${spId.value}&loaisanphamid=${btnRadio.value}`
             );

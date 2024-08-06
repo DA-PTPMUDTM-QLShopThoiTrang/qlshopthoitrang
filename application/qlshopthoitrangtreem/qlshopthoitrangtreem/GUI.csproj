@@ -307,7 +307,9 @@
     </Compile>
     <Compile Include="frmQLKhachHang.Designer.cs">
       <DependentUpon>frmQLKhachHang.cs</DependentUpon>
-    <Compile Include="frmQLDonHang.cs">
+	</Compile>
+
+	<Compile Include="frmQLDonHang.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmQLDonHang.Designer.cs">
@@ -361,7 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmQLKhachHang.resx">
       <DependentUpon>frmQLKhachHang.cs</DependentUpon>
-    <EmbeddedResource Include="frmQLDonHang.resx">
+	</EmbeddedResource>
+
+	<EmbeddedResource Include="frmQLDonHang.resx">
       <DependentUpon>frmQLDonHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmThemNguoiDungNhomND.resx">

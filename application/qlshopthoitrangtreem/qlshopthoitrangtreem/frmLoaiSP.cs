@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLL;
 using DAL;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace qlshopthoitrangtreem
 {
@@ -27,7 +24,7 @@ namespace qlshopthoitrangtreem
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.MultiSelect = false;
             txtID.Enabled = false;
-            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
+            
         }
 
         private async void DataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -53,7 +50,8 @@ namespace qlshopthoitrangtreem
             cboSP.DataSource = bllsp.layDsSP();
             cboSP.DisplayMember = "ten";
             cboSP.ValueMember = "id";
-            await this.loadData();
+            await this.loadData(Int32.Parse(cboSP.SelectedValue.ToString()));
+            dataGridView1.SelectionChanged += DataGridView1_SelectionChanged;
         }
 
         private async void btnTaiAnh_Click(object sender, EventArgs e)
