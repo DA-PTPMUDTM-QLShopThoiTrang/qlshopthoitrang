@@ -15,7 +15,7 @@ namespace qlshopthoitrangtreem
     {
         string tendangnhap = "admin";
         BLL_NguoiDung nguoidung = new BLL_NguoiDung();
-        
+
         public frmMain()
         {
             InitializeComponent();
@@ -125,10 +125,35 @@ namespace qlshopthoitrangtreem
             form.MdiParent = this;
             form.Show();
         }
+        private void loạiSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLoaiSP form = new frmLoaiSP();
+            form.MdiParent = this;
+            form.Show();
+        }
 
         private void thốngKêDoangThuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmThongKe form = new frmThongKe();
+            form.MdiParent = this;
+            form.Show();
+        }
+        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLKhachHang form = new frmQLKhachHang();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void kíchCỡSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmKichCo frm = new frmKichCo();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+        private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLDonHang form = new frmQLDonHang();
             form.MdiParent = this;
             form.Show();
         }

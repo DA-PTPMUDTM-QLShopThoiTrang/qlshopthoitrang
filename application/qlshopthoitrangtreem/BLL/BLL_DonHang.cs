@@ -22,7 +22,7 @@ namespace BLL
         public int layTongTrang()
         {
             double tong = (double)dlldonhang.layDsDonHang().Count;
-            return (int)Math.Ceiling(tong/limit);
+            return (int)Math.Ceiling(tong / limit);
         }
 
 
@@ -38,6 +38,18 @@ namespace BLL
         //{
         //    return dlldonhang.capNhat(donhang_id, trangthai);
         //}
+        public List<trangthaidonhang> layDsTrangThaiDonHang()
+        {
+            return dlldonhang.layDsTrangThaiDonHang();
+        }
+        public List<ChiTietDonHangSanPham> layChiTietDonHang(int donhang_id)
+        {
+            return dlldonhang.layChiTietDonHang(donhang_id);
+        }
+        public bool capNhatDH(int donhang_id, int trangthai)
+        {
+            return dlldonhang.capNhat(donhang_id, trangthai);
+        }
 
 
         /*public sanpham themSanPham(string ten, string mota, double gia, string gioitinh, int danhmuc_id, string anhdaidien)

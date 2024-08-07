@@ -43,10 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL_DanhMuc.cs" />
-    <Compile Include="DAL_DonHang.cs" />
-    <Compile Include="DAL_KhachHang.cs" />
-    <Compile Include="DAL_SanPham.cs" />
     <Compile Include="DAL_ThongKe.cs" />
+    <Compile Include="DAL_KhachHang.cs" />
+    <Compile Include="DAL_DonHang.cs" />
+    <Compile Include="DAL_SanPham.cs" />
+    <Compile Include="ChiTietDonHangSanPham.cs" />
     <Compile Include="NhomNguoiDungManHinh.cs" />
     <Compile Include="DAL_NguoiDungNhomNguoiDung .cs" />
     <Compile Include="DAL_NhomNguoiDung.cs" />

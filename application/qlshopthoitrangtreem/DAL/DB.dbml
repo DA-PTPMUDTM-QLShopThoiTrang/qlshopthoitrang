@@ -62,6 +62,7 @@
       <Column Name="TrangThaiDonHang_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="KhachHang_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="diachi" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="isThanhToan" Type="System.Boolean" CanBeNull="false" />
       <Association Name="donhang_chitietdonhang" Member="chitietdonhangs" ThisKey="id" OtherKey="DonHang_id" Type="chitietdonhang" />
       <Association Name="trangthaidonhang_donhang" Member="trangthaidonhang" ThisKey="TrangThaiDonHang_id" OtherKey="id" Type="trangthaidonhang" IsForeignKey="true" />
       <Association Name="khachhang_donhang" Member="khachhang" ThisKey="KhachHang_id" OtherKey="id" Type="khachhang" IsForeignKey="true" />

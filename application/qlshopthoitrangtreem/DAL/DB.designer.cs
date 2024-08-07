@@ -1274,6 +1274,8 @@ namespace DAL
 		
 		private string _diachi;
 		
+		private bool _isThanhToan;
+		
 		private EntitySet<chitietdonhang> _chitietdonhangs;
 		
 		private EntityRef<trangthaidonhang> _trangthaidonhang;
@@ -1298,6 +1300,8 @@ namespace DAL
     partial void OnKhachHang_idChanged();
     partial void OndiachiChanging(string value);
     partial void OndiachiChanged();
+    partial void OnisThanhToanChanging(bool value);
+    partial void OnisThanhToanChanged();
     #endregion
 		
 		public donhang()
@@ -1452,6 +1456,26 @@ namespace DAL
 					this._diachi = value;
 					this.SendPropertyChanged("diachi");
 					this.OndiachiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isThanhToan")]
+		public bool isThanhToan
+		{
+			get
+			{
+				return this._isThanhToan;
+			}
+			set
+			{
+				if ((this._isThanhToan != value))
+				{
+					this.OnisThanhToanChanging(value);
+					this.SendPropertyChanging();
+					this._isThanhToan = value;
+					this.SendPropertyChanged("isThanhToan");
+					this.OnisThanhToanChanged();
 				}
 			}
 		}
