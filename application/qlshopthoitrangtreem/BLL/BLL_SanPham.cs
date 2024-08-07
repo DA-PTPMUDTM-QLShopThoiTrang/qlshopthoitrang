@@ -151,6 +151,19 @@ namespace BLL
                 throw;
             }
         }
+        public bool xoaLoaiSP(int loaiID)
+        {
+            try
+            {
+                return dllsanpham.xoaLoaiSP(loaiID);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public kichcosanpham suaKichCo(kichcosanpham k)
         {
             try
