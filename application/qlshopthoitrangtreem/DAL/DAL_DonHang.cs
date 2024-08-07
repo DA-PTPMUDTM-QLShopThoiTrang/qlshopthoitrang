@@ -68,11 +68,11 @@ namespace DAL
             donhang dh = dbcontext.donhangs.FirstOrDefault(item => item.id == donhang_id);
             if (dh != null)
             {
-                
                 dh.trangthaidonhang = dbcontext.trangthaidonhangs.Single(d => d.id == trangthai);
                 if(trangthai == 3)
                 {
                     dh.isThanhToan = true;
+                    dh.ngaysua = DateTime.Now;
                 }
                 dbcontext.SubmitChanges();
                 return true;

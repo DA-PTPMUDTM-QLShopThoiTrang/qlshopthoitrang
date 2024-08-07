@@ -148,7 +148,7 @@ const order = (function () {
                                 <span class="text-gray-800">${
                                   item["trangthaidonhang_id"] == 1
                                     ? item["ngaytao"]["date"]
-                                    : item["ngaysua"]["date"]
+                                    : item?.ngaysua?.date
                                 }</span>
                             </h4>
                             <h4 class="whitespace-nowrap uppercase md:text-lg sm:text-base text-sm float-right p-2 text-rose-500">
