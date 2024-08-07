@@ -139,5 +139,11 @@ namespace qlshopthoitrangtreem
             frm.MdiParent = this;
             frm.Show();
         }
+        private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmQLDonHang form = new frmQLDonHang();
+            form.MdiParent = this;
+            form.Show();
+        }
     }
 }

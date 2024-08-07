@@ -1,0 +1,4 @@
+#env
+.env
+/includes/_key.php
+.vscode

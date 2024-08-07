@@ -1,13 +1,8 @@
 ﻿using System.Windows.Forms;
-
-
-
-
 namespace ThuVienControl
 {
     public partial class ctDangNhap : UserControl
     {
-
         public ctDangNhap()
         {
             InitializeComponent();
