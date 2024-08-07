@@ -13,7 +13,7 @@ using DAL;
 using BLL;
 
 using static DAL.DAL_ThongKe;
-using GUI;
+
 
 namespace qlshopthoitrangtreem
 {
@@ -266,7 +266,7 @@ namespace qlshopthoitrangtreem
 
                 string path = saveFile.FileName;
                 string projectPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName;
-                string templatePath = projectPath + "\\DanhSachKhacHang.xlsx";
+                string templatePath = projectPath + "\\DanhSachKhachHang.xlsx";
 
                 if (ExportkhachHang(pListSanPham, templatePath, ref path, false))
                 {

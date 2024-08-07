@@ -259,9 +259,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="ExcelExport.cs" />
-    <Compile Include="FileCommon.cs" />
     <Compile Include="frmCauHinh.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,8 +331,7 @@
     <Compile Include="frmThongKe.Designer.cs">
       <DependentUpon>frmThongKe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Global.cs" />
-    <Compile Include="HelperST.cs" />
+    <Compile Include=".cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpLoadToFirebaseStorage.cs" />
@@ -384,6 +380,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DanhSachDonHang.xlsx" />
+    <None Include="DanhSachKhachHang.xlsx" />
     <None Include="DanhSachSanPham.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
