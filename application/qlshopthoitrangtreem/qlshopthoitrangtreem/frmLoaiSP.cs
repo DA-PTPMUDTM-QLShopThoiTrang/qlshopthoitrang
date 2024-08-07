@@ -216,5 +216,32 @@ namespace qlshopthoitrangtreem
         {
             await this.loadData();
         }
+
+        private async void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                int loaiID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["id"].Value);
+                var result = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (bllsp.xoaLoaiSP(loaiID))
+                    {
+                        MessageBox.Show("Xóa thành công!");
+                        this.dataGridView1.Rows.Clear();
+                        await this.loadData();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Xóa không thành công!");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn kích cỡ để xóa!");
+            }
+        }
     }
 }

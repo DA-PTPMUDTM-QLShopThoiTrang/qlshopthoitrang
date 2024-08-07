@@ -16,11 +16,11 @@ namespace DAL
         }
         public List<loaisanpham> layLoaiSP()
         {
-            return dbcontext.loaisanphams.Select(l => l).ToList<loaisanpham>();
+            return dbcontext.loaisanphams.Select(l => l).Distinct().ToList<loaisanpham>();
         }
         public List<kichcosanpham> layKichCoSP()
         {
-            return dbcontext.kichcosanphams.Select(k => k).ToList<kichcosanpham>();
+            return dbcontext.kichcosanphams.Select(k => k).Distinct().ToList<kichcosanpham>();
         }
         public List<sanpham> layDsSanPham(int skip, int take)
         {
@@ -140,6 +140,25 @@ namespace DAL
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+        public bool xoaLoaiSP(int LoaiID)
+        {
+            try
+            {
+                var loai = dbcontext.loaisanphams.SingleOrDefault(l => l.id == LoaiID);
+                if(loai == null)
+                { 
+                    return false; 
+                }
+                dbcontext.loaisanphams.DeleteOnSubmit(loai);
+                dbcontext.SubmitChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
