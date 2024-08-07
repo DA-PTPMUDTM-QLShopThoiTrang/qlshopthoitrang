@@ -59,7 +59,9 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
-    <Reference Include="Microsoft.Bcl.Numerics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+	</Reference>
+
+	<Reference Include="Microsoft.Bcl.Numerics, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.Numerics.8.0.0\lib\net462\Microsoft.Bcl.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -108,7 +110,9 @@
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+	</Reference>
+
+	<Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
     </Reference>
     <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -292,7 +296,9 @@
     </Compile>
     <Compile Include="frmDanhMuc.Designer.cs">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
-    <Compile Include="frmKichCo.cs">
+	</Compile>
+
+	<Compile Include="frmKichCo.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmKichCo.Designer.cs">
@@ -383,7 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.cs</DependentUpon>
-    <EmbeddedResource Include="frmKichCo.resx">
+	</EmbeddedResource>
+
+	<EmbeddedResource Include="frmKichCo.resx">
       <DependentUpon>frmKichCo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoaiSP.resx">

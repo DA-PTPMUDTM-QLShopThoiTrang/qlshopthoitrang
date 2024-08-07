@@ -119,41 +119,48 @@ namespace qlshopthoitrangtreem
             form.Show();
         }
 
-        private void danhMụcToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            frmDanhMuc form = new frmDanhMuc();
-            form.MdiParent = this;
-            form.Show();
-        }
-        private void loạiSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+   
+
+
+
+        private void loạiSảnPhẩmToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             frmLoaiSP form = new frmLoaiSP();
             form.MdiParent = this;
             form.Show();
         }
 
-        private void thốngKêDoangThuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void kíchCởSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmThongKe form = new frmThongKe();
-            form.MdiParent = this;
-            form.Show();
+            frmKichCo frm = new frmKichCo();
+            frm.MdiParent = this;
+            frm.Show();
         }
-        private void quảnLýKháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void kháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmQLKhachHang form = new frmQLKhachHang();
             form.MdiParent = this;
             form.Show();
         }
 
-        private void kíchCỡSảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmKichCo frm = new frmKichCo();
-            frm.MdiParent = this;
-            frm.Show();
-        }
-        private void đơnHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        private void đơnHàngToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             frmQLDonHang form = new frmQLDonHang();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void thốngKêToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmThongKe form = new frmThongKe();
+            form.MdiParent = this;
+            form.Show();
+        }
+
+        private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDanhMuc form = new frmDanhMuc();
             form.MdiParent = this;
             form.Show();
         }

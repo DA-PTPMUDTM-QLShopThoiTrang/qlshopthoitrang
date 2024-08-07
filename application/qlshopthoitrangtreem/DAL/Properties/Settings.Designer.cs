@@ -26,8 +26,8 @@ namespace DAL.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=db_thoitrangtreem;Persist Security I" +
-            "nfo=True;User ID=sa;Password=sa")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-HPDFB2R3\\SQLEXPRESS;Initial Catalog=db_thoitrangtreem;User ID=" +
+            "sa1;Password=123")]
         public string db_thoitrangtreemConnectionString {
             get {
                 return ((string)(this["db_thoitrangtreemConnectionString"]));
