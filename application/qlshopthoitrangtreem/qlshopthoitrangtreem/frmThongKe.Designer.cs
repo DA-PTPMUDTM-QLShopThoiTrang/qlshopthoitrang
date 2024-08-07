@@ -30,6 +30,7 @@ namespace qlshopthoitrangtreem
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.cboThongKe = new System.Windows.Forms.ComboBox();
             this.btnExportDonHang = new System.Windows.Forms.Button();
             this.btnExportNguoiDung = new System.Windows.Forms.Button();
@@ -41,7 +42,6 @@ namespace qlshopthoitrangtreem
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -65,6 +65,15 @@ namespace qlshopthoitrangtreem
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1233, 445);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(663, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(104, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Xuất báo cáo";
             // 
             // cboThongKe
             // 
@@ -104,6 +113,7 @@ namespace qlshopthoitrangtreem
             this.btnExportSanPham.TabIndex = 7;
             this.btnExportSanPham.Text = "Xuất sản phẩm";
             this.btnExportSanPham.UseVisualStyleBackColor = true;
+            this.btnExportSanPham.Click += new System.EventHandler(this.btnExportSanPham_Click_1);
             // 
             // label2
             // 
@@ -164,15 +174,6 @@ namespace qlshopthoitrangtreem
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(1207, 217);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(663, 48);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(104, 20);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Xuất báo cáo";
             // 
             // frmThongKe
             // 

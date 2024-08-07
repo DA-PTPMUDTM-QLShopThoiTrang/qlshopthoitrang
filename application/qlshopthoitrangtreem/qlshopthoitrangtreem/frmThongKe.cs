@@ -13,6 +13,7 @@ using DAL;
 using BLL;
 
 using static DAL.DAL_ThongKe;
+using GUI;
 
 namespace qlshopthoitrangtreem
 {
@@ -58,7 +59,7 @@ namespace qlshopthoitrangtreem
                 var worksheet = package.Workbook.Worksheets[0]; // Giả định dữ liệu sẽ được đổ vào worksheet đầu tiên
 
                 // Đổ dữ liệu vào worksheet từ dòng 2, cột 1 (tùy thuộc vào cấu trúc tệp mẫu của bạn)
-                int startRow = 2;
+                int startRow = 7;
                 for (int i = 0; i < dataSource.Count; i++)
                 {
                     worksheet.Cells[startRow + i, 1].Value = dataSource[i].id; // id đã là kiểu int
@@ -149,7 +150,8 @@ namespace qlshopthoitrangtreem
 
 
                 string path = saveFile.FileName;
-                string templatePath = @"C:/Users/Admin/Desktop/New folder/DanhSachSanPham.xlsx";
+                string projectPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName;
+                string templatePath = projectPath + "\\DanhSachDonHang.xlsx";
 
                 if (ExportDonHang(pListDonHang, templatePath, ref path, false))
                 {
@@ -190,7 +192,7 @@ namespace qlshopthoitrangtreem
                 var worksheet = package.Workbook.Worksheets[0]; // Giả định dữ liệu sẽ được đổ vào worksheet đầu tiên
 
                 // Đổ dữ liệu vào worksheet từ dòng 2, cột 1 (tùy thuộc vào cấu trúc tệp mẫu của bạn)
-                int startRow = 2;
+                int startRow = 7;
                 for (int i = 0; i < dataSource.Count; i++)
                 {
                     worksheet.Cells[startRow + i, 1].Value = dataSource[i].id; // id đã là kiểu int
@@ -263,7 +265,8 @@ namespace qlshopthoitrangtreem
 
 
                 string path = saveFile.FileName;
-                string templatePath = @"C:/Users/Admin/Desktop/New folder/DanhSachSanPham.xlsx";
+                string projectPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName;
+                string templatePath = projectPath + "\\DanhSachKhacHang.xlsx";
 
                 if (ExportkhachHang(pListSanPham, templatePath, ref path, false))
                 {
@@ -305,7 +308,7 @@ namespace qlshopthoitrangtreem
                 var worksheet = package.Workbook.Worksheets[0]; // Giả định dữ liệu sẽ được đổ vào worksheet đầu tiên
 
                 // Đổ dữ liệu vào worksheet từ dòng 2, cột 1 (tùy thuộc vào cấu trúc tệp mẫu của bạn)
-                int startRow = 2;
+                int startRow = 7;
                 for (int i = 0; i < dataSource.Count; i++)
                 {
                     worksheet.Cells[startRow + i, 1].Value = dataSource[i].id; // id đã là kiểu int
@@ -331,6 +334,7 @@ namespace qlshopthoitrangtreem
 
         private void btnExportSanPham_Click(object sender, EventArgs e)
         {
+
             SaveFileDialog saveFile = new SaveFileDialog
             {
                 Filter = "Excel Files|*.xlsx",
@@ -387,7 +391,8 @@ namespace qlshopthoitrangtreem
 
 
                 string path = saveFile.FileName;
-                string templatePath = @"C:/Users/Admin/Desktop/New folder/DanhSachSanPham.xlsx";
+                string projectPath = System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).Parent.FullName;
+                string templatePath = projectPath + "\\DanhSachSanPham.xlsx";
 
                 if (ExportSanPham(pListSanPham, templatePath, ref path, false))
                 {
@@ -525,6 +530,11 @@ namespace qlshopthoitrangtreem
 
             // Đặt DataSource cho DataGridView
             dataGridView1.DataSource = dt;
+        }
+
+        private void btnExportSanPham_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

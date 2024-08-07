@@ -20,7 +20,7 @@ namespace qlshopthoitrangtreem
             Application.SetCompatibleTextRenderingDefault(false);
             loginForm = new frmDangNhap();
             /*Application.Run(new frmPhanQuyen());*/
-            Application.Run(loginForm);
+            Application.Run(new frmThongKe());
         }
     }
 }
